@@ -1,0 +1,127 @@
+\chapter{Matrices}
+Sans avoir défini ce qu'était une \textbf{matrice}, nous avons
+néanmoins introduit un objet appelé \textbf{matrice augmentée}.
+Sans plus attendre, voici une définition formelle d'une \textbf{matrice}.
+
+\begin{TrueDef}{Matrice}
+Soit $m$ et $n$ deux entier positifs; une matrice de \textbf{taille}
+$m\times n$
+est une collection de $mn$ nombres, appelés coefficients, arrangés dans un tableau rectangulaire:
+\[
+\begin{matrix}[cc]
+&\text{$n$ colonnes} \\
+\text{$m$ lignes}& \begin{pmatrix}
+        a_{11} & a_{12} & \ldots & a_{1n}\\
+        a_{21} & a_{22} & \ldots & a_{2n}\\
+        \vdots & \vdots & \vdots & \vdots \\
+        a_{m1} & a_{m2} & \ldots & a_{mn}
+        \end{pmatrix}
+  \end{matrix}
+\]
+\end{TrueDef}
+
+Vous avez peut-être remarqué\sidenote{
+Croyez-le ou non, ceci n'est pas une coïncidence.} que la notation utilisée pour
+les coefficients dans la définition
+d'une matrice ressemble étrangement à celle utilisée dans la définition d'un système d'équations linéaires.
+
+\begin{TrueDef}{Système d'équations linéaires}
+Un système de d'équations linéaires est une
+collection de $m$ équations linéaires qui portent
+sur les mêmes $n$ inconnues:
+\[
+\left\{
+	\begin{matrix}
+	a_{11}x_1 &+& a_{12}x_2 &+& \ldots &+& a_{1n}x_n &=& b_1 \\
+	a_{21}x_1 &+& a_{22}x_2 &+& \ldots &+& a_{2n}x_n &=& b_2 \\
+	\vdots && \vdots &&  && \vdots && \vdots \\
+	a_{m1}x_1 &+& a_{m2}x_2 &+& \ldots &+& a_{mn}x_n &=& b_m
+	\end{matrix}
+	\right.
+\]
+\end{TrueDef}
+
+\begin{Example}
+Voici une matrice de taille $2 \times 3$:
+\[\begin{bmatrix} 2 & 1 & 0 \\ 1 & 3 & 5 \\ \end{bmatrix}\]
+
+Au lieu d'utiliser des crochets, $[\ldots]$,
+  on utilise parfois des parenthèses pour encadrer les coefficients d'une matrice:
+  \[\begin{pmatrix} 2 & 1 & 0 \\ 1 & 3 & 5 \\ \end{pmatrix}\]
+\end{Example}
+
+Nous allons étudier plusieurs propriétés des matrices dans ce
+livre. Pour l'instant, nous allons nous limiter à définir deux
+\textit{formes} que peuvent prendre les matrices. 
+
+
+\section{Matrice de forme échelonnée}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+La matrice suivante est dans la \textbf{forme échelonnée}:
+\[
+\begin{bmatrix}[ccccccccc]
+p_1 & *  & * & * & * & * & * & * & * \\
+0 & 0 & p_2 & * & * & * & * & * & * \\
+0 & 0 & 0 & p_3 & * & * & * & * & * \\ 
+0 & 0 & 0 & 0 & 0 & 0 & p_4 & * & * \\ 
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & p_5 
+\end{bmatrix}
+\]
+Dans cette matrice, les coefficients $p_1, p_2, \ldots$
+sont tous différents de zéro. De plus, les coefficients
+identifiés par un astérisque, $*$, peuvent prendre n'importe
+quelle valeur. 
+Une matrice est en forme échelonnée si
+le premier coefficient non-nul d'une ligne donnée est toujours à 	la droite du coefficient non-nul de la ligne précédente. On appelle
+ce coefficient non-nul un \textbf{pivot}. Pour aider à identifier
+ce qu'on entent par une forme échelonnée, nous écrivons la matrice
+à nouveau mais, cette fois, nous 
+identifions une forme en escalier\sidenote{C'est à cette
+forme en escalier que le mot \textit{échelonné} fait
+référence.} sous laquelle tous
+les coefficients doivent être nuls.
+\[
+\newcommand*{\temp}{\multicolumn{1}{c|}{\color{red}0}}
+\begin{bmatrix}[ccccccccc]
+p_1 & * & *  & * & * & * & * & * & * \\ \cline{1-2}
+\color{red}0 & \temp & p_2 & * & * & * & * & * & *  \\ \cline{3-3}
+\color{red}0 &\color{red}0 & \temp & p_3 & * & * & * & * & * \\ \cline{4-6}
+\color{red}0 &\color{red}0 & \color{red}0 & \color{red}0 & \color{red}0 & \temp & p_4 & * & * \\ \cline{7-8}
+\color{red}0 &\color{red}0 & \color{red}0 &\color{red}0 & \color{red}0 & \color{red}0 & \color{red}0 & \temp & p_5 
+\end{bmatrix}
+\]
+Une matrice est dans la forme échelonnée \textbf{réduite} si,
+en plus d'être dans une forme échelonnée, tous les pivots
+sont égaux à 1, et tous les autres coefficients dans un colonne
+où il y a un pivot, sont égaux à 0.
+
+\[
+\newcommand*{\tempr}{\multicolumn{1}{c|}{\color{red}0}}
+\newcommand*{\tempb}{\multicolumn{1}{c|}{\color{blue}0}}
+\begin{bmatrix}[ccccccccc]
+\mbox{\large{\textcircled{\small $1$}}} & * & \color{blue}0 & \color{blue}0 & * & * & \color{blue}0 & * & \color{blue}0 \\ \cline{1-2}
+\color{blue}0 &\tempr & \mbox{\large{\textcircled{\small $1$}}} & \color{blue}0 & * & * & \color{blue}0 & * & \color{blue}0 \\ \cline{3-3}
+\color{blue}0 &\color{red}0 &  \tempb & \mbox{\large{\textcircled{\small $1$}}} & * & * & \color{blue}0 & * & \color{blue}0 \\ \cline{4-6}
+\color{blue}0 &\color{red}0 & \color{blue}0 & \color{blue}0 & \color{red}0 & \tempr & \mbox{\large{\textcircled{\small $1$}}} & * & \color{blue}0 \\ \cline{7-8}
+\color{blue}0 &\color{red}0 & \color{blue}0 & \color{blue}0 & \color{red}0 & \color{red}0 & \color{blue}0 & \tempr & \mbox{\large{\textcircled{\small $1$}}} 
+\end{bmatrix}
+\]
+Dans la matrice ci-dessus, on a encerclé les pivots et écrits
+tous les zéros qui sont dans une \textbf{colonne pivot}\sidenote{
+Une \textbf{colonne pivot} est une colonne où on retrouve un pivot.}
+en bleu.
+
+\begin{Example}
+La matrice augmentée
+\[
+\begin{bmatrix}[ccr|r]
+\mbox{\large{\textcircled{\small 1}}} & 0 & 0 & 2\\
+0 & \mbox{\large{\textcircled{\small 1}}} & 4 & 3\\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+est dans une forme échelonnée réduite, où on a
+identifié les pivots en les encerclant.
+\end{Example}

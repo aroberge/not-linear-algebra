@@ -1,0 +1,57 @@
+\documentclass[oneside,openany]{tufte-book}
+
+% % %  default French language settings
+\usepackage[utf8]{inputenc}	% enable input of accented letters
+\usepackage[T1]{fontenc}		% related to above
+\usepackage[french]{babel}		% French language support
+\usepackage{translator}		% same
+	\uselanguage{French}
+	\languagepath{French}
+
+\newcommand{\NotDefName}{Ceci n'est pas une définition.}
+\newcommand{\NotProofName}{Ceci n'est pas une démonstration.}
+\newcommand{\ExampleName}{Ceci est un exemple.}
+
+\usepackage{tcolorbox}
+
+\usepackage{./../styles/style}
+
+%\newcommand{\sidenote}{\footnote}
+
+
+\title{{\small Ceci n'est pas un manuel d'\newline}algèbre linéaire}
+\author{Andr\'e Roberge}
+%\publisher{\copyright Andr\'e Roberge \href{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt}{CC BY-NC-SA-4.0}}
+
+\begin{document}
+
+\maketitle
+
+\hphantom{a}
+\vfill
+\begin{figure*}
+\includegraphics{./../images/MagrittePipe.jpg}
+\begin{center}
+Par René Magritte
+\end{center}
+\end{figure*}
+\vfill
+
+\tableofcontents
+\include{introduction}
+\include{systeme}
+\include{matrices}
+\include{nbsolutions}
+\include{variables}
+
+
+\begin{tcolorbox}
+This is another \textbf{tcolorbox}.
+Try\footnote{Does this work?} this.
+
+\tcblower
+Here, you see the lower part of the box.
+\end{tcolorbox}
+
+
+\end{document}

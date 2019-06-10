@@ -1,0 +1,88 @@
+%\hypersetup{colorlinks}
+\usepackage{graphicx}
+
+\definecolor{DefColor}{rgb}{.1,.1,.6}
+\definecolor{NotDefColor}{rgb}{.8,0,0}
+\definecolor{NotProofColor}{rgb}{.9,.7,0}
+\definecolor{ExampleColor}{rgb}{.1,.6,.1}
+
+\usepackage{tikz}					% for drawing figures
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usetikzlibrary{patterns,backgrounds}
+\usetikzlibrary{calc}            % for block matrix
+
+\tikzset{>=stealth}
+\newcommand{\tikzmark}[3][]{\tikz[overlay,remember picture,baseline] \node [anchor=base,#1](#2) {#3};}
+
+%%%%%%%% for block matrix example; adapted from
+%% http://tex.stackexchange.com/questions/52689/problems-using-left-in-array-environment
+
+\newcommand{\DrawBox}[3][]{%
+    \tikz[overlay,remember picture]{
+        \coordinate (RightPoint) at (#3.east);
+    \draw[red,#1]
+      ($(#2)+(-.5em,.9em)$) rectangle
+      ($(RightPoint)+(0.2em,-0.3em)$);}
+}
+%
+%%%%% turn off active character ";" introduced by babel to ensure that
+%%% tikz works properly
+\newcommand{\OtherTikzmark}[1]{\shorthandoff{;}\tikz[overlay,remember picture] \node (#1) {};\shorthandon{;}}
+
+
+\usepackage{amssymb,amsmath}   % For better support of math
+\usepackage{mathtools}                  %
+%%%%%%
+% augmented matrix from http://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols r]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+% mdframed does not support sidenotes, marginnotes, etc.
+% that are used by the tufte-book class.
+\usepackage{mdframed}
+
+% Spacing command defined to help avoid breaking of
+% "boxed environments" defined below
+\newcommand{\myvspace}{\bigskip\vspace{\glueexpr\baselineskip + 0pt plus 20pt minus 15pt\relax}}
+
+\mdfdefinestyle{DefinitionStyle}{innertopmargin=5pt,linewidth=2pt,linecolor=DefColor,backgroundcolor=blue!3,innerrightmargin=20pt}
+
+% For "proper" math definitions, we use an environment based
+% on mdframed which, as mentioned above, does not support
+% marginal notes of any kind.
+\newenvironment{TrueDef}[1]%
+{\myvspace\begin{fullwidth}\begin{mdframed}[style=DefinitionStyle]%
+\raisebox{4pt}[0pt][-5pt]{\hspace{-12pt}\fcolorbox{DefColor}{DefColor}%
+{\bfseries \large\textcolor{white}{ #1 }}}\\}%
+{\end{mdframed}
+\end{fullwidth}\myvspace}
+
+% Generalization of \fbox to support color.
+\newcommand{\cfbox}[2]{%
+\setlength{\fboxrule}{2pt}
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+\fbox{\color{currentcolor}#2}}%
+}
+
+% Environment for "intuitive/approximative" definition.
+%\NotDefName is a language specific string, defined in the main file
+\newenvironment{NotDef}{\myvspace\noindent\cfbox{NotDefColor}{\NotDefName}{\color{NotDefColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt}
+\newline\vspace*{5pt}\sffamily}{\newline\noindent{\color{NotDefColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt\cfbox{NotDefColor}{$\bullet$}}\myvspace}
+
+% Environment for "example/justification" - hand-waving proof if you wish.
+%\NotProofName is a language specific string, defined in the main file
+\newenvironment{NotProof}{\myvspace\noindent\cfbox{NotProofColor}{\NotProofName}{\color{NotProofColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt}
+\newline\vspace*{5pt}\itshape}{\newline\noindent{\color{NotProofColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt\cfbox{NotProofColor}{$\bullet$}}\myvspace}
+
+% Environment for "example" - usually showing calculation steps.
+%\Example is a language specific string, defined in the main file
+\newenvironment{Example}{\myvspace\noindent\cfbox{ExampleColor}{\ExampleName}{\color{ExampleColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt}
+\newline\vspace*{5pt}\sffamily}{\newline\noindent{\color{ExampleColor}\leavevmode\leaders\hrule height 2pt\hfill\kern0pt\cfbox{ExampleColor}{$\bullet$}}\myvspace}

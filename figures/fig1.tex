@@ -1,0 +1,342 @@
+\documentclass{article}
+\usepackage{tikz}
+% % %  default French language settings
+\usepackage[utf8]{inputenc}	% enable input of accented letters
+\usepackage[T1]{fontenc}		% related to above
+\usepackage[french]{babel}		% French language support
+\usepackage{translator}		% same
+	\uselanguage{French}
+	\languagepath{French}
+
+\usepackage{amsmath}
+\usepackage{amssymb} 
+
+\begin{document}
+\section*{Revue}
+
+Que signifie une équation de la forme $\mathbf{A}\mathbf{x} = \mathbf{b}$?
+\vfill
+
+\noindent\textbf{\fbox{1.} C'est une façon d'écrire un système d'équations linéaires}
+\[
+\begin{matrix}
+a_{11} x_1 &+& a_{12} x_2 &=& b_1 \\
+a_{21} x_1 &+& a_{22} x_2 &=& b_2 
+\end{matrix}
+\]
+\vfill
+
+\noindent\textbf{\fbox{2.} C'est une façon de représenter
+une combinaison linéaires de vecteurs.}
+Par exemple, avec $\mathbf{A} = [\mathbf{a}_1 \, \mathbf{a}_2]$
+\[
+ \mathbf{A}\mathbf{x} = \mathbf{b} \qquad\Rightarrow
+\qquad
+x_1 \mathbf{a}_1 + x_2 \mathbf{a}_2 = \mathbf{b} 
+\]
+\vfill
+
+\noindent\textbf{\fbox{3.} C'est une façon de représenter
+une transformation linéaire.}
+\bigskip
+
+Par exemple, soit $\mathbf{b}\in \mathbb{R}^2$ et
+$\mathbf{x}\in \mathbb{R}^3$ alors on peut avoir
+\[
+\mathbf{A}_{2 \times 3} \mathbf{x}_{3\times 1} =
+\mathbf{b}_{2\times 1}
+\]
+\vfill
+
+\noindent\textbf{\fbox{4.} C'est également une façon
+de représenter un changement de base.}
+\bigskip
+
+Ceci est nouveau.
+\vfill
+
+\newpage
+
+\section*{Changement de base}
+Nous commençons avec un vecteur $\mathbf{v}$ dans
+le plan cartésien. 
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\draw[style=help lines,dashed] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,red,->]  (0,0)--(1,0) node[anchor=south]{$\mathbf{e}_1$};
+\draw[thick,red,->] (0,0)--(0,1) node[anchor=east]{$\mathbf{e}_2$};
+\draw[thick,black,->](0,0)--(7,4) node[anchor=south]{$\mathbf{v}$};
+\end{tikzpicture}
+
+Tout vecteur dans ce plan
+peut être écrit comme une combinaison linéaire
+de deux vecteurs de la base habituelle, également appelée base canonique.
+On peut vérifier que $\mathbf{v} = 7\mathbf{e}_1
++ 4 \mathbf{e}_2$
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\draw[style=help lines,dashed] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,red,->]  (0,0)--(7,0) node[anchor=north]{$7\mathbf{e}_1$};
+\draw[thick,red,->] (7,0)--(7,4) node[anchor=west]{$4\mathbf{e}_2$};
+\draw[thick,black,->](0,0)--(7,4) node[anchor=south]{$\mathbf{v}$};
+\end{tikzpicture}
+\newpage
+Introduisons un système de coordonnées différent
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\pgftransformcm{1}{-0.5}{1}{1}{\pgfpoint{0cm}{0cm}};
+\draw[style=help lines] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,blue,->]  (0,0)--(1,0) node[anchor=south]{$\mathbf{b}_1$};
+\draw[thick,blue,->] (0,0)--(0,1) node[anchor=east]{$\mathbf{b}_2$};
+\draw[thick,black,->](0,0)--(2,5) node[anchor=south]{$\mathbf{v}$};
+\end{tikzpicture}
+
+On peut vérifier que $\mathbf{v} = 2\mathbf{b}_1
++ 5 \mathbf{b}_2$
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\pgftransformcm{1}{-0.5}{1}{1}{\pgfpoint{0cm}{0cm}};
+\draw[style=help lines] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,blue,->]  (0,0)--(2,0) node[anchor=south]{$2\mathbf{b}_1$};
+\draw[thick,blue,->] (2,0)--(2,5) node[anchor=east]{$5\mathbf{b}_2$};
+\draw[thick,black,->](0,0)--(2,5) node[anchor=south]{$\mathbf{v}$};
+\end{tikzpicture}
+
+\newpage
+Superposons les deux systèmes de coordonnées:
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\draw[style=help lines,dashed] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,red,->]  (0,0)--(1,0) node[anchor=south]{$\mathbf{e}_1$};
+\draw[thick,red,->] (0,0)--(0,1) node[anchor=east]{$\mathbf{e}_2$};
+\draw[thick,black,->](0,0)--(7,4) node[anchor=south]{$\mathbf{v}$};
+\pgftransformcm{1}{-0.5}{1}{1}{\pgfpoint{0cm}{0cm}};
+\draw[style=help lines] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,blue,->]  (0,0)--(1,0) node[anchor=south]{$\mathbf{b}_1$};
+\draw[thick,blue,->] (0,0)--(0,1) node[anchor=east]{$\mathbf{b}_2$};
+\end{tikzpicture}
+
+Dans le plan cartésien, on écrit habituellement:
+\[
+\mathbf{e}_1 = \begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+\qquad
+\mathbf{e}_2 = \begin{bmatrix}
+0 \\
+1
+\end{bmatrix}
+\qquad
+\mathbf{v} = 7\mathbf{e}_1
++ 4 \mathbf{e}_2 = \begin{bmatrix}
+7 \\ 4
+\end{bmatrix}
+\]
+Dans ce système de coordonnées, défini par cette
+base canonique, on peut vérifier que
+\[
+\mathbf{b}_1 = \begin{bmatrix}\hphantom{-}
+1\\ -\frac12
+\end{bmatrix}
+\qquad
+\mathbf{b}_2 = \begin{bmatrix}
+1\\ 1
+\end{bmatrix}
+\qquad
+\mathbf{v} = 2\mathbf{b}_1
++ 5 \mathbf{b}_2 = 2\begin{bmatrix}
+\hphantom{-}1\\ -\frac12
+\end{bmatrix} + 5 \begin{bmatrix}
+1\\ 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\hphantom{-}2 + 5 \\ -1 + 5
+\end{bmatrix}
+= \begin{bmatrix}
+7 \\ 4
+\end{bmatrix}
+\]
+Notez que, utilisant la notation de la multiplication
+des matrices qu'on a vu jusqu'à présent, on a également l'égalité suivante:
+\[
+2\begin{bmatrix}
+\hphantom{-}1\\ -\frac12
+\end{bmatrix} + 5 \begin{bmatrix}
+1\\ 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\hphantom{-}1 & 1 \\
+-\frac12 & 2
+\end{bmatrix}
+\begin{bmatrix}
+2 \\ 5
+\end{bmatrix}
+\]
+La multiplication d'une matrice par un vecteur
+est égale à une combinaison linéaire des colonnes
+de la matrice.
+
+\newpage
+Supposons que l'on veuille exprimer le vecteur $\mathbf{v}$ comme une matrice colonne, de taille $2\times 1$, \textbf{sans faire référence aux coordonnées du plan cartésien}, mais en utilisant la base
+$B = \{\mathbf{b}_1,\mathbf{b}_2\}$
+
+\begin{tikzpicture}
+\clip (-2,-2) rectangle (10cm,6cm);
+\pgftransformcm{1}{-0.5}{1}{1}{\pgfpoint{0cm}{0cm}};
+\draw[style=help lines] (-14,-14) grid[step=1cm] (14,14);
+\draw[thick,blue,->]  (0,0)--(2,0) node[anchor=south]{$2\mathbf{b}_1$};
+\draw[thick,blue,->] (2,0)--(2,5) node[anchor=east]{$5\mathbf{b}_2$};
+\draw[thick,black,->](0,0)--(2,5) node[anchor=south]{$\mathbf{v}$};
+\end{tikzpicture}
+
+\[
+\mathbf{v} = 2\mathbf{b}_1 + 5 \mathbf{b}_2
+\]
+Ce qu'on peut faire est de définir les matrices
+suivantes:
+\[
+\mathbf{b}_1 = \begin{bmatrix}
+1 \\ 0
+\end{bmatrix}_B
+\qquad
+\mathbf{b}_2 = \begin{bmatrix}
+0 \\ 1
+\end{bmatrix}_B
+\qquad
+\mathbf{v} = 2\mathbf{b}_1
++ 5 \mathbf{b}_2
+=
+\begin{bmatrix}
+5 \\ 2
+\end{bmatrix}_B
+\]
+où l'indice ${}_B$ fait référence à la base $B$.
+
+On a une relation entre les coordonnées cartésiennes
+et celles de la base $B$:
+\[
+2\begin{bmatrix}
+\hphantom{-}1\\ -\frac12
+\end{bmatrix} + 5 \begin{bmatrix}
+1\\ 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\hphantom{-}1 & 1 \\
+-\frac12 & 2
+\end{bmatrix}
+\begin{bmatrix}
+2 \\ 5
+\end{bmatrix}_B
+=
+P_B\begin{bmatrix}
+2 \\ 5
+\end{bmatrix}_B
+\]
+La matrice $P_B$ est appelée la matrice de passage de la base $B$ à la base cartésienne habituelle. Les colonnes
+de $P_B$ sont les vecteurs $\mathbf{b}_1,\mathbf{b}_2$
+exprimés dans les coordonnées cartésiennes.
+
+De façon plus générale, supposons que l'on veuille obtenir les coordonnées d'un vecteur $v$ dans une base $C$, on aura:
+
+\[
+\begin{bmatrix}
+v_1 \\ v_2
+\end{bmatrix}_C
+=
+\begin{bmatrix}
+(\mathbf{b}_1)_C
+&
+(\mathbf{b}_1)_C
+\end{bmatrix}
+\begin{bmatrix}
+y_1 \\ y_2
+\end{bmatrix}_B
+=
+\begin{bmatrix}
+\begin{pmatrix}
+b_{11} \\
+b_{12}
+\end{pmatrix}_C
+&
+\begin{pmatrix}
+b_{21} \\
+b_{22}
+\end{pmatrix}_C
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\ v_2
+\end{bmatrix}_B
+\]
+On peut vérifier que
+\[
+\begin{bmatrix}
+b_{11} \\ b_{12}
+\end{bmatrix}_C
+=
+\begin{bmatrix}
+\begin{pmatrix}
+b_{11} \\
+b_{12}
+\end{pmatrix}_C
+&
+\begin{pmatrix}
+b_{21} \\
+b_{22}
+\end{pmatrix}_C
+\end{bmatrix}
+\begin{bmatrix}
+1 \\ 0
+\end{bmatrix}_B
+\]
+et
+\[
+\begin{bmatrix}
+b_{21} \\ b_{22}
+\end{bmatrix}_C
+=
+\begin{bmatrix}
+\begin{pmatrix}
+b_{11} \\
+b_{12}
+\end{pmatrix}_C
+&
+\begin{pmatrix}
+b_{21} \\
+b_{22}
+\end{pmatrix}_C
+\end{bmatrix}
+\begin{bmatrix}
+0 \\ 1
+\end{bmatrix}_B
+\]
+\section*{Notation}
+On utilise parfois la notation suivante:
+\[
+[\mathbf{x}]_C = \underset{\scriptscriptstyle C \leftarrow B}
+P
+\quad
+[\mathbf{x}]_B
+\]
+Pour désigner la matrice de passage de la base $B$ à la base $C$.
+
+Dans les cas où la matrice de passage est inversible, on peut vérifier que
+\[
+\underset{\scriptscriptstyle C \leftarrow B}
+P
+=
+\underset{\scriptscriptstyle B \leftarrow C}
+P^{-1}
+\]
+
+Dans notre cours, on utilisera seulement la matrice de passage pour les transformations d'une base formée des vecteurs propres (si cette base existe) à la base
+cartésienne. On la désignera simplement par $P$, et son inverse par $P^{-1}$ comme d'habitude.
+\end{document}
